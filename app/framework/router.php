@@ -21,7 +21,7 @@ class Router
             if ($test && strcasecmp($request_method, $controller_method) == 0) {
                 if (method_exists($controller, $controller_method)) {
                     return call_user_func_array(
-                        array($controller, $controller_method),
+                        [$controller, $controller_method],
                         $params
                     );
                 }

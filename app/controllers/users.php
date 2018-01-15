@@ -1,5 +1,5 @@
 <?php
-namespace Component;
+namespace Controllers;
 
 class Users
 {
