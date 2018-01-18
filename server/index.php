@@ -1,15 +1,15 @@
 <?php
-require_once 'app/framework/router.php';
-require_once 'app/framework/db.php';
-require_once 'app/controllers/users.php';
+require_once 'framework/router.php';
+require_once 'framework/db.php';
+require_once 'controllers/users.php';
 
 error_reporting(E_ALL);
 
 $db = new \Framework\DB\MySqlConnection([
-    'host' => 'localhost',
+    'host' => 'db',
     'dbname' => 'test',
-    'username' => '',
-    'password' => '',
+    'username' => 'root',
+    'password' => 'example',
 ]);
 
 $db->query("
