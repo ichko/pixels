@@ -1,1 +1,2 @@
-<h1>Home</h1>
+
+<h1><?=$model['app_name']?></h1>

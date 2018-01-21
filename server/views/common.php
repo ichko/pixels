@@ -1,17 +1,19 @@
 <?php
 namespace Views;
 
-require_once 'framework/view.php';
-
-class Common extends \Framework\View
+class Common
 {
     public function home()
     {
-        return $this->render('home');
+        return [
+            'template' => 'home',
+            'model' => ['app_name' => 'App'],
+            'title' => ['Homepage'],
+        ];
     }
 
     public function not_found()
     {
-        return '404';
+        return ['template' => 'not_found'];
     }
 }

@@ -1,12 +1,13 @@
 <?php
 namespace Framework;
 
-require_once 'config.php';
-
 class Renderer
 {
-    public $templates_root = Config::templates_root;
-    public $template_ext = Config::templates_ext;
+    public function __construct($templates_root, $template_ext)
+    {
+        $this->templates_root = $templates_root;
+        $this->template_ext = $template_ext;
+    }
 
     public function render($template_name, $model = [])
     {

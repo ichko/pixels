@@ -17,7 +17,8 @@
     </ul>
 </nav>
 
-<?=$model['html']?>
+<h1><?=$model['title']?></h1>
+<?=$model['content']?>
 
 </main>
 </body>

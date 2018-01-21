@@ -1,27 +1,29 @@
 <?php
-require_once 'framework/router.php';
-require_once 'framework/db.php';
-require_once 'framework/renderer.php';
-
-require_once 'views/common.php';
-require_once 'views/user.php';
-
 error_reporting(E_ALL);
 
-$router = (new \Framework\Router())
-    ->add('', new \Views\Common, 'home')
-    ->add('login', new \Views\User, 'login')
-    ->add('register', new \Views\User, 'register')
-    ->add('.*', new \Views\Common, 'not_found');
+require_once 'framework/dependency_container.php';
+require_once 'framework/view_renderer.php';
+require_once 'framework/router.php';
+require_once 'framework/i18n.php';
+require_once 'framework/db.php';
 
-$data = $router->route(
-    $_SERVER['REQUEST_URI'],
-    $_SERVER['REQUEST_METHOD']
-);
+require_once 'views/common.php';
+require_once 'views/auth.php';
 
-$html = (new \Framework\Renderer())->render('layout', [
-    'html' => $data['rendition'],
-    'title' => $data['model']['title'],
-]);
+$container = (new \Framework\DependencyContainer)
+    ->register('i18n', \Framework\I18N::class)
+    ->register('common', \Views\Common::class)
+    ->register('auth', \Views\Auth::class);
 
-echo $html;
+[$method_name, $view_data] = (new \Framework\Router)
+    ->add('', $container->resolve('common'), 'home')
+    ->add('login', $container->resolve('auth'), 'login')
+    ->add('register', $container->resolve('auth'), 'register')
+    ->add('.*', $container->resolve('common'), 'not_found')
+    ->route(
+        $_SERVER['REQUEST_URI'],
+        $_SERVER['REQUEST_METHOD']
+    );
+
+echo (new \Framework\ViewRenderer('templates', '.php'))
+    ->render_view('layout', $method_name, $view_data);

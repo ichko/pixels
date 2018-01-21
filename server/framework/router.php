@@ -13,13 +13,13 @@ class Router
 
     public function route($path, $request_method)
     {
-        foreach ($this->route_definitions as $route => list($instance, $method)) {
+        foreach ($this->route_definitions as $route => [$instance, $method]) {
             $test = $this->try_route($route, $path, $params);
             if ($test) {
-                return call_user_func_array(
+                return [$method, call_user_func_array(
                     [$instance, $method],
                     $params
-                );
+                )];
             }
         }
 
