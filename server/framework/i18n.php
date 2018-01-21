@@ -3,7 +3,7 @@ namespace Framework;
 
 class I18N
 {
-    public function translate($key)
+    public function T($key)
     {
         return $key;
     }

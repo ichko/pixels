@@ -8,20 +8,14 @@ class DependencyContainer
 
     public function register($name, $resolver, $singleton = true)
     {
-        $this->container[$name] = [
-            'resolver' => $resolver,
-            'is_singleton' => $singleton,
-        ];
-
+        $this->container[$name] = [$resolver, $singleton];
         return $this;
     }
 
     public function resolve($name)
     {
         if (array_key_exists($name, $this->container)) {
-            $resolver = $this->container[$name]['resolver'];
-            $is_singleton = $this->container[$name]['is_singleton'];
-
+            [$resolver, $is_singleton] = $this->container[$name];
             if ($is_singleton) {
                 if (!array_key_exists($name, $this->singleton_instances)) {
                     $this->singleton_instances[$name] = $this->get_instance($resolver);
