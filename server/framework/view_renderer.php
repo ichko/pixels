@@ -7,19 +7,25 @@ class ViewRenderer extends Renderer
 {
     public function render_view($layout_name, $method_name, $view_data)
     {
-        if (!array_key_exists('template_name', $view_data)) {
-            $view_data['template_name'] = $method_name;
+        $model = [];
+        $template_name = $method_name;
+        $title = 'Title';
+
+        if (array_key_exists('model', $view_data)) {
+            $model = $view_data['model'];
         }
-        if (!array_key_exists('model', $view_data)) {
-            $view_data['model'] = [];
+        if (array_key_exists('template', $view_data)) {
+            $template_name = $view_data['template'];
+        } else {
+            $model = $view_data;
         }
-        if (!array_key_exists('title', $view_data['model'])) {
-            $view_data['model']['title'] = 'Title';
+        if (array_key_exists('title', $model)) {
+            $title = $model['title'];
         }
 
         return parent::render($layout_name, [
-            'content' => parent::render($view_data['template_name'], $view_data['model']),
-            'title' => $view_data['model']['title'],
+            'content' => parent::render($template_name, $model),
+            'title' => $title,
         ]);
     }
 }
