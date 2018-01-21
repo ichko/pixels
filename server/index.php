@@ -1,15 +1,17 @@
 <?php
 require_once 'framework/router.php';
 require_once 'framework/db.php';
-require_once 'controllers/users.php';
+require_once 'framework/renderer.php';
+
+require_once 'views/pages.php';
 
 error_reporting(E_ALL);
 
 $db = new \Framework\DB\MySqlConnection([
-    'host' => 'db',
+    'host' => 'localhost',
     'dbname' => 'test',
-    'username' => 'root',
-    'password' => 'example',
+    'username' => '',
+    'password' => '',
 ]);
 
 $db->query("
@@ -20,11 +22,10 @@ $db->query("
         `pass_hash` VARCHAR(256) NOT NULL ,
         PRIMARY KEY (`id`))
     ENGINE = InnoDB;
-");
-
+")->execute();
 $router = (new \Framework\Router())
-    ->add('home', function () {return 'This is home!';})
-    ->add('users/?/test/?', new \Controllers\Users())
+    ->add('', new \Views\Pages\Home())
+    ->add('login', new \Views\Pages\Login())
     ->add('.*', function () {return '404';})
 ;
 
@@ -34,3 +35,6 @@ $response = $router(
 );
 
 echo $response;
+
+(new \Framework\Renderer('templates'))
+    ->render('layout', '');

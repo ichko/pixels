@@ -28,6 +28,7 @@ services:
     build: server/
     ports:
       - 8001:80
+    command: docker-php-ext-install pdo pdo_mysql
     volumes:
       - ./server:/var/www/html
       # - ./config:/usr/local/etc/php

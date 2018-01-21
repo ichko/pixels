@@ -38,6 +38,7 @@ class Router
 
     private function try_route($route, $path, &$params)
     {
+        $path = trim($path, '/');
         $route_regex = $this->parse_route($route);
 
         $test = preg_match($route_regex, $path, $params, PREG_OFFSET_CAPTURE, 0);
@@ -56,6 +57,6 @@ class Router
         $route = str_replace('/', '\/', $route);
         $route = preg_replace('/\?/', '([\w\d-_]+)', $route);
 
-        return "/$route$/i";
+        return "/^$route$/i";
     }
 }
