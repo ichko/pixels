@@ -1,6 +1,8 @@
 <?php
+namespace Framework;
 
 class Config
 {
-    public static $templateRoot = 'templates';
+    const templates_root = 'templates';
+    const templates_ext = '.php';
 }

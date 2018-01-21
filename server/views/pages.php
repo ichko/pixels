@@ -1,18 +1,20 @@
 <?php
 namespace Views\Pages;
 
-class Home
+require_once 'framework/view.php';
+
+class Home extends \Framework\View
 {
     public function get()
     {
-        return 'Home';
+        return $this->render('home');
     }
 }
 
-class Login
+class Login extends \Framework\View
 {
     public function get()
     {
-        return 'Login';
+        return $this->render('user');
     }
 }
