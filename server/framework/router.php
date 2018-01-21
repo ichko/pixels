@@ -5,29 +5,19 @@ class Router
 {
     public $route_definitions = [];
 
-    public function add($route, $controller, $controller_method = 'get')
+    public function add($route, $instance, $method = 'index')
     {
-        $this->route_definitions[$route] = [$controller, $controller_method];
+        $this->route_definitions[$route] = [$instance, $method];
         return $this;
     }
 
-    public function __invoke($path, $request_method)
+    public function route($path, $request_method)
     {
-        foreach (
-            $this->route_definitions as $route =>
-            list($controller, $controller_method)
-        ) {
+        foreach ($this->route_definitions as $route => list($instance, $method)) {
             $test = $this->try_route($route, $path, $params);
-            if ($test && strcasecmp($request_method, $controller_method) == 0) {
-                if (method_exists($controller, $controller_method)) {
-                    return call_user_func_array(
-                        [$controller, $controller_method],
-                        $params
-                    );
-                }
-
+            if ($test) {
                 return call_user_func_array(
-                    $controller,
+                    [$instance, $method],
                     $params
                 );
             }
