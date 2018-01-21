@@ -8,7 +8,7 @@ class Renderer
     public $templates_root = Config::templates_root;
     public $template_ext = Config::templates_ext;
 
-    public function render($template_name, $model = null)
+    public function render($template_name, $model = [])
     {
         $template_path = $this->templates_root
         . DIRECTORY_SEPARATOR

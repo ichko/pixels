@@ -12,8 +12,11 @@ class View
         self::$renderer = new \Framework\Renderer();
     }
 
-    public function render($template_name, $model = null)
+    public function render($template_name, $model = ['title' => 'Title'])
     {
-        return self::$renderer->render($template_name);
+        return [
+            'rendition' => self::$renderer->render($template_name, $model),
+            'model' => $model,
+        ];
     }
 }

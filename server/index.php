@@ -12,17 +12,16 @@ $router = (new \Framework\Router())
     ->add('', new \Views\Common, 'home')
     ->add('login', new \Views\User, 'login')
     ->add('register', new \Views\User, 'register')
-    ->add('.*', new \Views\Common, 'not_found')
-;
+    ->add('.*', new \Views\Common, 'not_found');
 
-$content = $router->route(
+$data = $router->route(
     $_SERVER['REQUEST_URI'],
     $_SERVER['REQUEST_METHOD']
 );
 
 $html = (new \Framework\Renderer())->render('layout', [
-    'title' => 'title',
-    'html' => $content,
+    'html' => $data['rendition'],
+    'title' => $data['model']['title'],
 ]);
 
 echo $html;
