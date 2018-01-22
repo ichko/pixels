@@ -12,6 +12,7 @@ class Auth
 
     public function login()
     {
+        $this->auth_service->assert_not_logged();
         $validation_report = '';
 
         if ($this->post_service->is_set()) {
@@ -37,6 +38,7 @@ class Auth
 
     public function register()
     {
+        $this->auth_service->assert_not_logged();
         $validation_report = '';
 
         if ($this->post_service->is_set()) {

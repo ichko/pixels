@@ -40,6 +40,20 @@ class AuthService
         $this->session_service->set('USER_ID', $user_id);
     }
 
+    public function assert_logged()
+    {
+        if (!$this->is_logged()) {
+            $this->navigation_service->navigate_to('/');
+        }
+    }
+
+    public function assert_not_logged()
+    {
+        if ($this->is_logged()) {
+            $this->navigation_service->navigate_to('/');
+        }
+    }
+
     public function get_user($user_id)
     {
         return $this->db->query("

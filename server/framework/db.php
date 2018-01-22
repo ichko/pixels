@@ -39,16 +39,18 @@ class MySqlConnection
 {
     public function __construct($db_config)
     {
-        if (!isset($db_config['host'])) {
-            $db_config['host'] = 'localhost';
-        }
-
+        $this->db_name = $db_config['db_name'];
         $this->connection = new \PDO(
-            "mysql:host={$db_config['host']};dbname={$db_config['dbname']}",
+            "mysql:host={$db_config['host']};dbname={$db_config['db_name']}",
             $db_config["username"],
             $db_config["password"]
         );
         $this->connection->query("SET NAMES utf8");
+    }
+
+    public function get_db_name()
+    {
+        return $this->db_name;
     }
 
     public function query($sql)
