@@ -8,12 +8,13 @@ require_once 'framework/db.php';
 
 require_once 'views/common.php';
 require_once 'views/auth.php';
-require_once 'views/banner.php';
+require_once 'views/snippet.php';
 
 require_once 'services/auth.php';
 require_once 'services/navigation.php';
 require_once 'services/post.php';
 require_once 'services/session.php';
+require_once 'services/snippets.php';
 
 $container = (new \Framework\DependencyContainer)
     ->register('renderer', function ($container) {
@@ -31,10 +32,11 @@ $container = (new \Framework\DependencyContainer)
     ->register('auth_service', \Services\AuthService::class)
     ->register('navigation_service', \Services\NavigationService::class)
     ->register('session_service', \Services\SessionService::class)
+    ->register('snippets_service', \Services\SnippetsService::class)
 
     ->register('common_view', \Views\CommonView::class)
     ->register('auth_view', \Views\AuthView::class)
-    ->register('banner_view', \Views\BannerView::class)
+    ->register('snippet_view', \Views\SnippetView::class)
 
     ->register('routing', function ($container) {
         return (new \Framework\Router)
@@ -44,8 +46,9 @@ $container = (new \Framework\DependencyContainer)
                 $container->resolve('auth_service')->logout();
             })
             ->add('register', $container->resolve('auth_view'), 'register')
-            ->add('buy', $container->resolve('banner_view'), 'buy')
-            ->add('banner/register', $container->resolve('banner_view'), 'register')
+            ->add('snippet/create', $container->resolve('snippet_view'), 'create')
+            ->add('snippet/save/?', $container->resolve('snippet_view'), 'save')
+            ->add('snippet/edit/?', $container->resolve('snippet_view'), 'edit')
             ->add('.*', $container->resolve('common_view'), 'not_found');
     })
 

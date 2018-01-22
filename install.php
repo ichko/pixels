@@ -14,15 +14,11 @@ $db->query("
 ")->execute();
 
 $db->query("
-    CREATE TABLE `test`.`banners` (
+    CREATE TABLE `{$db->get_db_name()}`.`snippets` (
         `id` INT NOT NULL AUTO_INCREMENT ,
         `name` VARCHAR(256) NOT NULL ,
         `description` VARCHAR(512) NOT NULL ,
-        `url` VARCHAR(256) NOT NULL ,
-        `top_x` INT NOT NULL ,
-        `top_y` INT NOT NULL ,
-        `width` INT NOT NULL ,
-        `height` INT NOT NULL ,
+        `code` TEXT NOT NULL ,
         `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
         `user_id` INT NOT NULL ,
         PRIMARY KEY (`id`)
