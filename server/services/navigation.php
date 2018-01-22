@@ -8,9 +8,13 @@ class NavigationService
         $this->append = $append;
     }
 
-    public function navigate_to($url)
+    public function navigate_to($extra)
     {
-        header("Location: $url" . DIRECTORY_SEPARATOR . "$append");
-        exit();
+        $host = $_SERVER['HTTP_HOST'];
+        $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        $extra = rtrim($extra, '/\\');
+
+        header("Location: http://$host$uri/$extra");
+        exit;
     }
 }

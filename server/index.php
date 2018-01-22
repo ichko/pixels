@@ -11,8 +11,13 @@ require_once 'views/auth.php';
 require_once 'services/auth.php';
 require_once 'services/navigation.php';
 require_once 'services/post.php';
+require_once 'services/session.php';
 
 $container = (new \Framework\DependencyContainer)
+    ->register('renderer', function ($container) {
+        $auth_service = $container->resolve('auth_service');
+        return new \Framework\ViewRenderer($auth_service, 'templates', '.php');
+    })
     ->register('db', new \Framework\DB\MySqlConnection([
         'host' => 'localhost',
         'dbname' => 'test',
@@ -23,6 +28,7 @@ $container = (new \Framework\DependencyContainer)
     ->register('post_service', \Services\PostService::class)
     ->register('auth_service', \Services\AuthService::class)
     ->register('navigation_service', \Services\NavigationService::class)
+    ->register('session_service', \Services\SessionService::class)
 
     ->register('common', \Views\Common::class)
     ->register('auth', \Views\Auth::class)
@@ -31,6 +37,9 @@ $container = (new \Framework\DependencyContainer)
         return (new \Framework\Router)
             ->add('', $container->resolve('common'), 'home')
             ->add('login', $container->resolve('auth'), 'login')
+            ->add('logout', function () use ($container) {
+                $container->resolve('auth_service')->logout();
+            })
             ->add('register', $container->resolve('auth'), 'register')
             ->add('.*', $container->resolve('common'), 'not_found');
     })
@@ -41,7 +50,7 @@ $container = (new \Framework\DependencyContainer)
             $_SERVER['REQUEST_METHOD']
         );
 
-        echo (new \Framework\ViewRenderer('templates', '.php'))
+        echo $container->resolve('renderer')
             ->render_view('layout', $method_name, $view_data);
     });
 

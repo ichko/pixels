@@ -16,6 +16,9 @@ class Router
         foreach ($this->route_definitions as $route => [$instance, $method]) {
             $test = $this->try_route($route, $path, $params);
             if ($test) {
+                if (is_callable($instance)) {
+                    return $instance(...$params);
+                }
                 return [$method, call_user_func_array(
                     [$instance, $method],
                     $params

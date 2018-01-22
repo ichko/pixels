@@ -9,16 +9,21 @@ class Query
         $this->statement = $connection->prepare($sql);
     }
 
-    public function bindAll($fields)
+    public function get_last_id()
+    {
+        return $this->connection->lastInsertId();
+    }
+
+    public function bind_all($fields)
     {
         foreach ($fields as $key => &$val) {
-            $this->statement->bindParam(':' . $key, $val);
+            $this->statement->bindParam(":$key", $val);
         }
 
         return $this;
     }
 
-    public function fetch($fetch_type = PDO::FETCH_ASSOC)
+    public function fetch($fetch_type = \PDO::FETCH_ASSOC)
     {
         return $this->statement->fetch($fetch_type);
     }

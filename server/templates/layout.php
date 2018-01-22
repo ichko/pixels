@@ -1,3 +1,6 @@
+<?php
+$auth_service = $model['auth_service'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +13,20 @@
 <main>
 
 <nav>
-    <ul>
-        <li><a href="/">Home</a></li>
+    <ul class="right">
+<?php if ($auth_service->is_logged()) {?>
+    <li>Hello, <?=$auth_service->get_logged_user()['name']?></li>
+    <li><a href="/logout">Logout</a></li>
+    <li><a href="/buy">Buy</a></li>
+<?php } else {?>
         <li><a href="/login">Login</a></li>
         <li><a href="/register">Register</a></li>
+<?php }?>
+    </ul>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contacts">Contacts</a></li>
     </ul>
 </nav>
 
