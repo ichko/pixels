@@ -1,19 +1,15 @@
 <?php
 namespace Views;
 
-class Common
+class CommonView
 {
     public function home()
     {
-        return [
-            'template' => 'home',
-            'model' => ['app_name' => 'App'],
-            'title' => ['Homepage'],
-        ];
+        return ['title' => 'Homepage'];
     }
 
     public function not_found()
     {
-        return ['template' => 'not_found'];
+        return ['title' => '404'];
     }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Views;
 
-class Auth
+class AuthView
 {
     public function __construct($auth_service, $post_service, $navigation_service)
     {

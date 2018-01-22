@@ -8,6 +8,8 @@ require_once 'framework/db.php';
 
 require_once 'views/common.php';
 require_once 'views/auth.php';
+require_once 'views/buy.php';
+
 require_once 'services/auth.php';
 require_once 'services/navigation.php';
 require_once 'services/post.php';
@@ -30,18 +32,19 @@ $container = (new \Framework\DependencyContainer)
     ->register('navigation_service', \Services\NavigationService::class)
     ->register('session_service', \Services\SessionService::class)
 
-    ->register('common', \Views\Common::class)
-    ->register('auth', \Views\Auth::class)
+    ->register('common_view', \Views\CommonView::class)
+    ->register('auth_view', \Views\AuthView::class)
+    ->register('buy_view', \Views\BuyView::class)
 
     ->register('routing', function ($container) {
         return (new \Framework\Router)
-            ->add('', $container->resolve('common'), 'home')
-            ->add('login', $container->resolve('auth'), 'login')
+            ->add('', $container->resolve('common_view'), 'home')
+            ->add('login', $container->resolve('auth_view'), 'login')
             ->add('logout', function () use ($container) {
                 $container->resolve('auth_service')->logout();
             })
-            ->add('register', $container->resolve('auth'), 'register')
-            ->add('.*', $container->resolve('common'), 'not_found');
+            ->add('register', $container->resolve('auth_view'), 'register')
+            ->add('.*', $container->resolve('common_view'), 'not_found');
     })
 
     ->register('bootstrap', function ($container) {
