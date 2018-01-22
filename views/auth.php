@@ -15,7 +15,7 @@ class AuthView
         $this->auth_service->assert_not_logged();
         $validation_report = '';
 
-        if ($this->post_service->is_set()) {
+        if ($this->post_service->is_post()) {
             $user_id = $this->auth_service->get_user_id(
                 $this->post_service->get('username'),
                 $this->post_service->get('password')
@@ -41,7 +41,7 @@ class AuthView
         $this->auth_service->assert_not_logged();
         $validation_report = '';
 
-        if ($this->post_service->is_set()) {
+        if ($this->post_service->is_post()) {
             $is_registered = $this->auth_service->is_user_registered(
                 $this->post_service->get('username'),
                 $this->post_service->get('email')

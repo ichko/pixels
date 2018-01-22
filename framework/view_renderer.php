@@ -12,6 +12,10 @@ class ViewRenderer extends Renderer
     }
     public function render_view($layout_name, $method_name, $view_data)
     {
+        if (is_string($view_data) || is_null($view_data)) {
+            return $view_data;
+        }
+
         $model = [];
         $template_name = $method_name;
         $title = 'Title';

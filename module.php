@@ -8,7 +8,7 @@ require_once 'framework/db.php';
 
 require_once 'views/common.php';
 require_once 'views/auth.php';
-require_once 'views/buy.php';
+require_once 'views/banner.php';
 
 require_once 'services/auth.php';
 require_once 'services/navigation.php';
@@ -34,7 +34,7 @@ $container = (new \Framework\DependencyContainer)
 
     ->register('common_view', \Views\CommonView::class)
     ->register('auth_view', \Views\AuthView::class)
-    ->register('buy_view', \Views\BuyView::class)
+    ->register('banner_view', \Views\BannerView::class)
 
     ->register('routing', function ($container) {
         return (new \Framework\Router)
@@ -44,6 +44,8 @@ $container = (new \Framework\DependencyContainer)
                 $container->resolve('auth_service')->logout();
             })
             ->add('register', $container->resolve('auth_view'), 'register')
+            ->add('buy', $container->resolve('banner_view'), 'buy')
+            ->add('banner/register', $container->resolve('banner_view'), 'register')
             ->add('.*', $container->resolve('common_view'), 'not_found');
     })
 
