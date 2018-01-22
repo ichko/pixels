@@ -22,8 +22,14 @@ class SnippetView
         $this->auth_service->assert_logged();
         $snippet_model = $this->snippets_service->get($id);
         $snippet_model['title'] = 'Editing';
-        var_dump($snippet_model);
 
         return $snippet_model;
+    }
+
+    public function save($id)
+    {
+        return json_encode([
+            'success' => $this->snippets_service->save($id),
+        ]);
     }
 }

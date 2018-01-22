@@ -34,4 +34,22 @@ class SnippetsService
             WHERE s.id = :id
         ")->bind_all(['id' => $id])->execute()->fetch();
     }
+
+    public function save($id)
+    {
+        $snippet = $this->get($id);
+        if ($snippet['user_id'] == $this->auth_service->get_logged_user_id()) {
+
+            $fields = $this->post_service->get_post(['code', 'name', 'description']);
+            $fields['id'] = $id;
+
+            return !!$this->db->query("
+                UPDATE snippets
+                SET code=:code, name=:name, description=:description
+                WHERE id=:id;
+            ")->bind_all($fields)->execute();
+        }
+
+        return false;
+    }
 }

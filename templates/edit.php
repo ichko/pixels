@@ -1,10 +1,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/mode-javascript.js"></script>
 <script src="https://ace.c9.io/build/src/ace.js"></script>
-
-<script>
-    var editor = ace.edit("editor");
-    editor.session.setMode(new JavaScriptMode());
-</script>
+<script src="/public/js/editor.js"></script>
 
 <style>
 #editor {
@@ -29,3 +25,8 @@
     <canvas id="canvas"></canvas>
 <div>
 <div id="editor"><?=$model['code']?></div>
+<script>
+    window.addEventListener('load', () => {
+        <?=$model['code']?>
+    });
+</script>
