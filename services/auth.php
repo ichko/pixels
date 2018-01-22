@@ -43,7 +43,7 @@ class AuthService
     public function assert_logged()
     {
         if (!$this->is_logged()) {
-            $this->navigation_service->navigate_to('/');
+            $this->navigation_service->navigate_to('login');
         }
     }
 
@@ -65,6 +65,11 @@ class AuthService
     public function get_logged_user()
     {
         return $this->get_user($this->session_service->get('USER_ID'));
+    }
+
+    public function get_logged_user_id()
+    {
+        return $this->session_service->get('USER_ID');
     }
 
     public function register($username, $password, $email)

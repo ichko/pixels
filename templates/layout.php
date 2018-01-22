@@ -17,7 +17,7 @@ $auth_service = $model['auth_service'];
 <?php if ($auth_service->is_logged()) {?>
     <li>Hello, <?=$auth_service->get_logged_user()['name']?></li>
     <li><a href="/logout">Logout</a></li>
-    <li><a href="/buy">Buy</a></li>
+    <li><a href="/snippet/create">Create new</a></li>
 <?php } else {?>
         <li><a href="/login">Login</a></li>
         <li><a href="/register">Register</a></li>
