@@ -21,6 +21,9 @@ class SnippetView
     {
         $this->auth_service->assert_logged();
         $snippet_model = $this->snippet_service->get($id);
+        if (!$snippet_model) {
+            $this->navigation_service->navigate_to('404');
+        }
         $snippet_model['title'] = 'Editing';
 
         return $snippet_model;

@@ -12,7 +12,7 @@
 <div class="top">
     <h4><?=$model['name']?></h4>
     <ul class="info">
-        <li><input type="text" value="<?=$model['name']?>"></li>
+        <li><input id="snippet-name" type="text" value="<?=$model['name']?>"></li>
         <li>Author: <b><?=$model['username']?></b></li>
     </ul>
     <ul class="right info">

@@ -7,7 +7,7 @@ $auth_service = $model['auth_service'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?=$model['title']?></title>
+    <title><?=$model['title']?> :: The joy of painting</title>
 </head>
 <body>
 <main>
