@@ -32,7 +32,7 @@ $container = (new \Framework\DependencyContainer)
     ->register('auth_service', \Services\AuthService::class)
     ->register('navigation_service', \Services\NavigationService::class)
     ->register('session_service', \Services\SessionService::class)
-    ->register('snippets_service', \Services\SnippetsService::class)
+    ->register('snippet_service', \Services\SnippetsService::class)
 
     ->register('common_view', \Views\CommonView::class)
     ->register('auth_view', \Views\AuthView::class)

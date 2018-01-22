@@ -3,9 +3,9 @@ namespace Views;
 
 class SnippetView
 {
-    public function __construct($snippets_service, $auth_service, $navigation_service)
+    public function __construct($snippet_service, $auth_service, $navigation_service)
     {
-        $this->snippets_service = $snippets_service;
+        $this->snippet_service = $snippet_service;
         $this->auth_service = $auth_service;
         $this->navigation_service = $navigation_service;
     }
@@ -13,14 +13,14 @@ class SnippetView
     public function create()
     {
         $this->auth_service->assert_logged();
-        $id = $this->snippets_service->create();
+        $id = $this->snippet_service->create();
         $this->navigation_service->navigate_to("snippet/edit/$id");
     }
 
     public function edit($id)
     {
         $this->auth_service->assert_logged();
-        $snippet_model = $this->snippets_service->get($id);
+        $snippet_model = $this->snippet_service->get($id);
         $snippet_model['title'] = 'Editing';
 
         return $snippet_model;
@@ -29,7 +29,7 @@ class SnippetView
     public function save($id)
     {
         return json_encode([
-            'success' => $this->snippets_service->save($id),
+            'success' => $this->snippet_service->save($id),
         ]);
     }
 }

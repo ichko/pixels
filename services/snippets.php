@@ -12,6 +12,18 @@ class SnippetsService
         $this->db = $db;
     }
 
+    public function get_all()
+    {
+        return $this->db->query("
+            SELECT
+                s.user_id, u.name AS username,
+                s.id, s.name, s.description, s.code,
+                s.date_created
+            FROM snippets s
+            INNER JOIN users u ON s.user_id = u.id
+        ")->execute()->fetch_all();
+    }
+
     public function create()
     {
         return $this->db->query("

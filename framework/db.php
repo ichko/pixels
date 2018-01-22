@@ -28,6 +28,11 @@ class Query
         return $this->statement->fetch($fetch_type);
     }
 
+    public function fetch_all($fetch_type = \PDO::FETCH_ASSOC)
+    {
+        return $this->statement->fetchAll($fetch_type);
+    }
+
     public function execute()
     {
         $this->statement->execute();

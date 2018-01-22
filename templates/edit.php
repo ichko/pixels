@@ -4,9 +4,8 @@
 
 <style>
 #editor {
-    position: absolute;
-    width: 500px;
-    height: 400px;
+    width: 100%;
+    height: 100%;
 }
 </style>
 
@@ -21,10 +20,15 @@
         <li id="save" class="btn">Save</li>
     </ul>
 </div>
+
 <div id="preview">
     <canvas id="canvas"></canvas>
 <div>
-<div id="editor"><?=$model['code']?></div>
+
+<div id="editor-container">
+    <div id="editor"><?=$model['code']?></div>
+</div>
+
 <script>
     window.addEventListener('load', () => {
         <?=$model['code']?>
