@@ -1,6 +1,6 @@
-<?=$model['validation_report']?>
 <form method="POST">
-    <input type="text" name="username" value="<?=$model['username']?>">
-    <input type="password" name="password">
+    <?=$model['validation_report']?>
+    <input type="text" name="username" value="<?=$model['username']?>" placeholder="Name">
+    <input type="password" name="password" placeholder="Password">
     <input type="submit" value="submit">
 </form>

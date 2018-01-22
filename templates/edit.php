@@ -10,7 +10,6 @@
 </style>
 
 <div class="top">
-    <h4><?=$model['name']?></h4>
     <ul class="info">
         <li><input id="snippet-name" type="text" value="<?=$model['name']?>"></li>
         <li>Author: <b><?=$model['username']?></b></li>
@@ -23,7 +22,7 @@
 
 <div id="preview">
     <canvas id="canvas"></canvas>
-<div>
+</div>
 
 <div id="editor-container">
     <div id="editor"><?=$model['code']?></div>

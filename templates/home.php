@@ -2,12 +2,16 @@
 
 $count = 0;
 foreach ($model['snippets'] as $snippet) {?>
-<ul class="snippet">
-    <span class="number"><?=$count++?></span>
-    <span class="right info"><?=$snippet['date_created']?></span>
-    <li><a href="snippet/edit/<?=$snippet['id']?>">
+<div class="snippet-container">
+<div class="snippet">
+    <span class="number">#<?=$count++?></span>
+    <a href="snippet/edit/<?=$snippet['id']?>">
         <?=$snippet['name']?>
-    </a></li>
-    <li>Author: <?=$snippet['username']?></li>
-</ul>
+    </a>
+    <ul class="info">
+        <li>Date <b><?=$snippet['date_created']?></b></li>
+        <li>Author <b><?=$snippet['username']?></b></li>
+    </ul>
+</div>
+</div>
 <?php }
