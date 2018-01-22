@@ -4,14 +4,26 @@ error_reporting(E_ALL);
 require_once 'framework/dependency_container.php';
 require_once 'framework/view_renderer.php';
 require_once 'framework/router.php';
-require_once 'framework/i18n.php';
 require_once 'framework/db.php';
 
 require_once 'views/common.php';
 require_once 'views/auth.php';
+require_once 'services/auth.php';
+require_once 'services/navigation.php';
+require_once 'services/post.php';
 
 $container = (new \Framework\DependencyContainer)
-    ->register('i18n', \Framework\I18N::class)
+    ->register('db', new \Framework\DB\MySqlConnection([
+        'host' => 'localhost',
+        'dbname' => 'test',
+        'username' => '',
+        'password' => '',
+    ]))
+
+    ->register('post_service', \Services\PostService::class)
+    ->register('auth_service', \Services\AuthService::class)
+    ->register('navigation_service', new \Services\NavigationService())
+
     ->register('common', \Views\Common::class)
     ->register('auth', \Views\Auth::class);
 

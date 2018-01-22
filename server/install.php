@@ -1,5 +1,4 @@
 <?php
-require_once 'config/singleton/php';
 
 $db->query("
     CREATE TABLE IF NOT EXISTS `test`.`users` (
