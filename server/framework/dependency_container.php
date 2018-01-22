@@ -31,6 +31,9 @@ class DependencyContainer
 
     private function get_instance($resolver)
     {
+        if (is_callable($resolver)) {
+            return $resolver($this);
+        }
         if (is_object($resolver)) {
             return $resolver;
         }
@@ -42,7 +45,15 @@ class DependencyContainer
         if (!is_null($constructor)) {
             $arguments_info = $constructor->getParameters();
             foreach ($arguments_info as $argument_info) {
-                $arguments[] = $this->resolve($argument_info->name);
+                try {
+                    $arguments[] = $this->resolve($argument_info->name);
+                } catch (\Exception $exception) {
+                    if ($argument_info->isOptional()) {
+                        $arguments[] = $argument_info->getDefaultValue();
+                    } else {
+                        throw $exception;
+                    }
+                }
             }
         }
 

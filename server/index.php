@@ -22,20 +22,27 @@ $container = (new \Framework\DependencyContainer)
 
     ->register('post_service', \Services\PostService::class)
     ->register('auth_service', \Services\AuthService::class)
-    ->register('navigation_service', new \Services\NavigationService())
+    ->register('navigation_service', \Services\NavigationService::class)
 
     ->register('common', \Views\Common::class)
-    ->register('auth', \Views\Auth::class);
+    ->register('auth', \Views\Auth::class)
 
-[$method_name, $view_data] = (new \Framework\Router)
-    ->add('', $container->resolve('common'), 'home')
-    ->add('login', $container->resolve('auth'), 'login')
-    ->add('register', $container->resolve('auth'), 'register')
-    ->add('.*', $container->resolve('common'), 'not_found')
-    ->route(
-        $_SERVER['REQUEST_URI'],
-        $_SERVER['REQUEST_METHOD']
-    );
+    ->register('routing', function ($container) {
+        return (new \Framework\Router)
+            ->add('', $container->resolve('common'), 'home')
+            ->add('login', $container->resolve('auth'), 'login')
+            ->add('register', $container->resolve('auth'), 'register')
+            ->add('.*', $container->resolve('common'), 'not_found');
+    })
 
-echo (new \Framework\ViewRenderer('templates', '.php'))
-    ->render_view('layout', $method_name, $view_data);
+    ->register('bootstrap', function ($container) {
+        [$method_name, $view_data] = $container->resolve('routing')->route(
+            $_SERVER['REQUEST_URI'],
+            $_SERVER['REQUEST_METHOD']
+        );
+
+        echo (new \Framework\ViewRenderer('templates', '.php'))
+            ->render_view('layout', $method_name, $view_data);
+    });
+
+$container->resolve('bootstrap');
