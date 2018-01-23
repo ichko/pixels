@@ -1,6 +1,7 @@
 * {
     cursor: default;
     /* max-width: 100%; */
+    transition: bottom 200ms, background 200ms;
 }
 
 html {
@@ -51,10 +52,18 @@ h1 {
     text-align: center;
 }
 
+hr {
+    border: none;
+    border-top: 2px solid #ccc;
+    margin: 20px;
+    display: block;
+}
+
 content {
     height: 100%;
     max-height: 100%;
-    padding-top: 60px;
+    padding: 56px 0 0 0;
+    box-sizing: border-box;
     position: relative;
     z-index: 7;
     display: block;
@@ -112,9 +121,24 @@ input[type="email"] {
     background: transparent;
     border: none;
     border-bottom: 2px dashed #999;
+    color: #666;
 }
 
-input[type="submit"] {
+input[type="text"]:hover,
+input[type="password"]:hover,
+input[type="email"]:hover {
+    border-color: #666;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+    border-color: #333;
+    color: #000;
+}
+
+input[type="submit"],
+button {
     width: 100%;
     outline: none;
     margin: 10px 0;
@@ -130,8 +154,10 @@ input[type="submit"] {
     cursor: pointer;
 }
 
-input[type="submit"]:hover {
-    opacity: 0.8;
+input[type="submit"]:hover,
+button:hover {
+    background: #e40a6f;
+    color: #fff;
 }
 
 .snippet-container {
@@ -201,6 +227,7 @@ footer {
 #editor {
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
 }
 
 #preview {
@@ -216,32 +243,57 @@ footer {
 }
 
 #editor-container {
-    width: 40%;
+    width: 45%;
     height: 100%;
     float: left;
 }
 
-.top {
-    /* height: 100%; */
-    background: #e3e3e3;
-    padding: 5px;
+.settings input {
+    border: 2px solid #ccc;
+    padding: 15px;
+    margin-left: 15px;
 }
 
-.top .info {
-    width: 50%;
+.settings {
+    border-top: 2px dashed #ccc;
+    background: #eee;
+    padding: 5px;
+    position: fixed;
+    bottom: -145px;
+    width: 100%;
+    z-index: 8;
+}
+
+.show-settings {
+    position: absolute;
+    display: inline;
+    top: -40px;
+    padding: 10px 20px;
+    left: 0;
+    background: #eee;
+}
+
+.settings:hover,
+.show-settings .settings {
+    bottom: 16px;
+}
+
+.settings .info {
+    width: 80%;
+}
+
+.settings li.meta {
+    font-size: 13pt;
+    padding: 2px 10px;
+    color: #333;
 }
 
 .controls {
-    width: 50%;
+    width: 20%;
 }
 
 .controls .button {
-    width: 48%;
-    padding: 20px;
-    font-size: 13px;
-    text-transform: uppercase;
-    float: left;
-    margin: 1%;
+    height: 80px;
 }
 
 .loader {
@@ -265,20 +317,20 @@ footer {
     right: 10px;
     padding: 20px;
     font-size: 12pt;
-    color: #000;
+    color: #fff;
     background: rgb(255, 217, 0);
 }
 
 .notification.error {
-    background: #f08282;
+    background: #e22121;
 }
 
 .notification.success {
-    background: greenyellow;
+    background: rgb(162, 216, 15);
 }
 
-.iframe-preview {
-    width: 60%;
+#iframe-preview {
+    width: 55%;
     height: 100%;
     border: none;
 }

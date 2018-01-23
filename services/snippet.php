@@ -28,10 +28,11 @@ class SnippetService
     public function create()
     {
         return $this->db->query("
-            INSERT INTO snippets (user_id)
-            VALUES (:user_id);
+            INSERT INTO snippets (user_id, name)
+            VALUES (:user_id, :name);
         ")->bind_all([
             'user_id' => $this->auth_service->get_logged_user_id(),
+            'name' => 'Title',
         ])->execute()->get_last_id();
     }
 
@@ -60,11 +61,11 @@ class SnippetService
             $fields = $this->post_service->get_post(['code', 'name', 'description']);
             $fields['id'] = $id;
 
-            return !!$this->db->query("
+            return [!!$this->db->query("
                 UPDATE snippets
                 SET code=:code, name=:name, description=:description
                 WHERE id=:id;
-            ")->bind_all($fields)->execute();
+            ")->bind_all($fields)->execute(), ''];
         }
 
         return [false, 'You can only save your own snippets'];

@@ -14,4 +14,11 @@ foreach ($model['snippets'] as $snippet) {?>
     </ul>
 </div>
 </div>
-<?php }
+
+
+<?php }?>
+
+<div class="clear"></div>
+<hr />
+
+
