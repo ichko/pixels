@@ -14,7 +14,7 @@ require_once 'services/auth.php';
 require_once 'services/navigation.php';
 require_once 'services/post.php';
 require_once 'services/session.php';
-require_once 'services/snippets.php';
+require_once 'services/snippet.php';
 
 $container = (new \Framework\DependencyContainer)
     ->register('renderer', new \Framework\Renderer('templates', '.php'))
@@ -33,7 +33,7 @@ $container = (new \Framework\DependencyContainer)
     ->register('auth_service', \Services\AuthService::class)
     ->register('navigation_service', \Services\NavigationService::class)
     ->register('session_service', \Services\SessionService::class)
-    ->register('snippet_service', \Services\SnippetsService::class)
+    ->register('snippet_service', \Services\SnippetService::class)
 
     ->register('common_view', \Views\CommonView::class)
     ->register('auth_view', \Views\AuthView::class)
@@ -50,7 +50,7 @@ $container = (new \Framework\DependencyContainer)
             ->add('snippet/create', $container->resolve('snippet_view'), 'create')
             ->add('snippet/save/?', $container->resolve('snippet_view'), 'save')
             ->add('snippet/edit/?', $container->resolve('snippet_view'), 'edit')
-            ->add('snippet/view/?', $container->resolve('snippet_view'), 'edit')
+            ->add('snippet/view/?', $container->resolve('snippet_view'), 'view')
             ->add('.*', $container->resolve('common_view'), 'not_found');
     })
 

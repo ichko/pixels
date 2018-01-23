@@ -1,13 +1,14 @@
 <?php
 namespace Services;
 
-class SnippetsService
+class SnippetService
 {
     public function __construct(
         $navigation_service, $post_service, $auth_service, $db
     ) {
         $this->navigation_service = $navigation_service;
         $this->post_service = $post_service;
+        $this->auth_service = $auth_service;
         $this->auth_service = $auth_service;
         $this->db = $db;
     }
@@ -49,6 +50,10 @@ class SnippetsService
 
     public function save($id)
     {
+        if (!$this->auth_service->is_logged()) {
+            return [false, 'You need to log in'];
+        }
+
         $snippet = $this->get($id);
         if ($snippet['user_id'] == $this->auth_service->get_logged_user_id()) {
 
@@ -62,6 +67,6 @@ class SnippetsService
             ")->bind_all($fields)->execute();
         }
 
-        return false;
+        return [false, 'You can only save your own snippets'];
     }
 }

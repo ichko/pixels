@@ -3,11 +3,12 @@ namespace Views;
 
 class SnippetView
 {
-    public function __construct($snippet_service, $auth_service, $navigation_service)
+    public function __construct($snippet_service, $auth_service, $navigation_service, $renderer)
     {
         $this->snippet_service = $snippet_service;
         $this->auth_service = $auth_service;
         $this->navigation_service = $navigation_service;
+        $this->renderer = $renderer;
     }
 
     public function create()
@@ -28,10 +29,17 @@ class SnippetView
         return $snippet_model;
     }
 
+    public function view($id)
+    {
+        return $this->renderer->render('view', $this->snippet_service->get($id));
+    }
+
     public function save($id)
     {
+        [$success, $reason] = $this->snippet_service->save($id);
         return json_encode([
-            'success' => $this->snippet_service->save($id),
+            'success' => $success,
+            'reason' => $reason,
         ]);
     }
 }

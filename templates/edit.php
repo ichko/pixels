@@ -9,21 +9,12 @@
     </ul>
 </div>
 <input type="hidden" id="snippet-id" value="<?=$model['id']?>">
-<div id="preview">
-    <canvas id="canvas"></canvas>
-</div>
 
 <div id="editor-container">
     <div id="editor"><?=$model['code']?></div>
 </div>
+<iframe class="iframe-preview" src="/snippet/view/<?=$model['id']?>"></iframe>
 
 <script>
-    function initUserCode() {
-        <?=$model['code']?>
-    }
-
-    window.onload = () => {
-        bootstrapEditor();
-        initUserCode();
-    };
+    window.onload = bootstrapEditor;
 </script>
