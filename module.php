@@ -15,6 +15,7 @@ require_once 'services/navigation.php';
 require_once 'services/post.php';
 require_once 'services/session.php';
 require_once 'services/snippet.php';
+require_once 'services/validation.php';
 
 $container = (new \Framework\DependencyContainer)
     ->register('renderer', new \Framework\Renderer('templates', '.php'))
@@ -34,6 +35,11 @@ $container = (new \Framework\DependencyContainer)
     ->register('navigation_service', \Services\NavigationService::class)
     ->register('session_service', \Services\SessionService::class)
     ->register('snippet_service', \Services\SnippetService::class)
+    ->register('make_validation', function () {
+        return function ($validations) {
+            return new \Services\ValidationService($validations);
+        };
+    })
 
     ->register('common_view', \Views\CommonView::class)
     ->register('auth_view', \Views\AuthView::class)

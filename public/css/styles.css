@@ -334,3 +334,11 @@ footer {
     height: 100%;
     border: none;
 }
+
+.errors {
+    padding: 15px 20px;
+    margin: 10px 0;
+    background: rgb(223, 26, 26);
+    border-bottom: 3px solid rgb(172, 18, 18);
+    color: #fff;
+}

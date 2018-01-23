@@ -10,28 +10,25 @@ class AuthService
         $this->navigation_service = $navigation_service;
     }
 
-    public function get_user_id($username, $password)
+    public function get_user_id($model)
     {
+        $model['pass_hash'] = $this->hash_password($model['password']);
+        unset($model['password']);
+
         return $this->db->query("
             SELECT `id` FROM `users` WHERE
-            `name`= :username AND
+            `name`= :name AND
             `pass_hash` = :pass_hash
-        ")->bind_all([
-            'username' => $username,
-            'pass_hash' => $this->hash_password($password),
-        ])->execute()->fetch()['id'];
+        ")->bind_all($model)->execute()->fetch()['id'];
     }
 
-    public function is_user_registered($username, $email)
+    public function is_user_registered($model)
     {
         return $this->db->query("
             SELECT COUNT(*) AS `num_rows` FROM `users` WHERE
-            `name`= :username OR
+            `name`= :name OR
             `email` = :email
-        ")->bind_all([
-            'username' => $username,
-            'email' => $email,
-        ])->execute()->fetch()['num_rows'];
+        ")->bind_all($model)->execute()->fetch()['num_rows'];
     }
 
     public function login($user_id)
@@ -72,16 +69,15 @@ class AuthService
         return $this->session_service->get('USER_ID');
     }
 
-    public function register($username, $password, $email)
+    public function register($model)
     {
+        $model['pass_hash'] = $this->hash_password($model['password']);
+        unset($model['password']);
+
         $user_id = $this->db->query("
             INSERT INTO `users` (`name`, `email`, `pass_hash`)
-            VALUES (:username, :email, :pass_hash);"
-        )->bind_all([
-            'username' => $username,
-            'email' => $email,
-            'pass_hash' => $this->hash_password($password),
-        ])->execute()->get_last_id();
+            VALUES (:name, :email, :pass_hash);"
+        )->bind_all($model)->execute()->get_last_id();
         $this->login($user_id);
     }
 

@@ -58,7 +58,7 @@ class SnippetService
         $snippet = $this->get($id);
         if ($snippet['user_id'] == $this->auth_service->get_logged_user_id()) {
 
-            $fields = $this->post_service->get_post(['code', 'name', 'description']);
+            $fields = $this->post_service->get_json_post(['code', 'name', 'description']);
             $fields['id'] = $id;
 
             return [!!$this->db->query("
