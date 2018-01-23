@@ -244,3 +244,36 @@ footer {
     float: left;
     margin: 1%;
 }
+
+.loader {
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    left: 0;
+    padding-top: 150px;
+    background: rgba(50, 50, 50, .8);
+    color: #fff;
+    font-size: 30pt;
+}
+
+.notification {
+    z-index: 10;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 20px;
+    font-size: 12pt;
+    color: #000;
+    background: rgb(255, 217, 0);
+}
+
+.notification.error {
+    background: #f08282;
+}
+
+.notification.success {
+    background: greenyellow;
+}

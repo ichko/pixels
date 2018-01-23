@@ -10,6 +10,12 @@ $auth_service = $model['auth_service'];
     <title><?=$model['title']?> :: The joy of painting</title>
 
     <link rel="stylesheet" type="text/css" href="/public/css/styles.css">
+
+    <script src="https://rawgit.com/ajaxorg/ace-builds/master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/js/requester.js"></script>
+    <script src="/public/js/loader.js"></script>
+    <script src="/public/js/notifier.js"></script>
+    <script src="/public/js/editor.js"></script>
 </head>
 <body>
 

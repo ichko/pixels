@@ -1,6 +1,3 @@
-<script src="https://rawgit.com/ajaxorg/ace-builds/master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-<script src="/public/js/editor.js"></script>
-
 <div class="top clear">
     <div class="right controls">
         <button id="run" class="button">Run</button>
@@ -11,7 +8,7 @@
         <li>Author: <b><?=$model['username']?></b></li>
     </ul>
 </div>
-
+<input type="hidden" id="snippet-id" value="<?=$model['id']?>">
 <div id="preview">
     <canvas id="canvas"></canvas>
 </div>
@@ -21,7 +18,12 @@
 </div>
 
 <script>
-    window.addEventListener('load', () => {
-        // <-?=$model['code']?>
-    });
+    function initUserCode() {
+        <?=$model['code']?>
+    }
+
+    window.onload = () => {
+        bootstrapEditor();
+        initUserCode();
+    };
 </script>

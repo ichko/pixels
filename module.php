@@ -17,7 +17,8 @@ require_once 'services/session.php';
 require_once 'services/snippets.php';
 
 $container = (new \Framework\DependencyContainer)
-    ->register('renderer', function ($container) {
+    ->register('renderer', new \Framework\Renderer('templates', '.php'))
+    ->register('view_renderer', function ($container) {
         $auth_service = $container->resolve('auth_service');
         return new \Framework\ViewRenderer($auth_service, 'templates', '.php');
     })
@@ -49,6 +50,7 @@ $container = (new \Framework\DependencyContainer)
             ->add('snippet/create', $container->resolve('snippet_view'), 'create')
             ->add('snippet/save/?', $container->resolve('snippet_view'), 'save')
             ->add('snippet/edit/?', $container->resolve('snippet_view'), 'edit')
+            ->add('snippet/view/?', $container->resolve('snippet_view'), 'edit')
             ->add('.*', $container->resolve('common_view'), 'not_found');
     })
 
@@ -58,6 +60,6 @@ $container = (new \Framework\DependencyContainer)
             $_SERVER['REQUEST_METHOD']
         );
 
-        echo $container->resolve('renderer')
+        echo $container->resolve('view_renderer')
             ->render_view('layout', $method_name, $view_data);
     });
