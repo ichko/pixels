@@ -1,7 +1,8 @@
 <?php
-require_once '../module.php';
+require_once '../framework/db.php';
+require_once 'db_config.php';
 
-$db = $container->resolve('db');
+$db = new \Framework\DB\MySqlConnection($db_config);
 
 $db->query("
     CREATE TABLE IF NOT EXISTS `{$db->get_db_name()}`.`users` (

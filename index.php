@@ -1,4 +1,4 @@
 <?php
-require_once 'module.php';
+require_once 'config/module.php';
 
 $container->resolve('bootstrap');

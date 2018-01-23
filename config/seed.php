@@ -1,7 +1,9 @@
 <?php
-require_once '../module.php';
+require_once '../framework/db.php';
+require_once 'db_config.php';
 
-$db = $container->resolve('db');
+$db = new \Framework\DB\MySqlConnection($db_config);
 $seed_sql = file_get_contents('seed.sql');
-
 $db->query($seed_sql)->execute();
+
+echo 'DB seeded!';

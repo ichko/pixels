@@ -1,6 +1,8 @@
 <?php
 error_reporting(E_ALL);
 
+require_once 'db_config.php';
+
 require_once 'framework/dependency_container.php';
 require_once 'framework/view_renderer.php';
 require_once 'framework/router.php';
@@ -23,12 +25,7 @@ $container = (new \Framework\DependencyContainer)
         $auth_service = $container->resolve('auth_service');
         return new \Framework\ViewRenderer($auth_service, 'templates', '.php');
     })
-    ->register('db', new \Framework\DB\MySqlConnection([
-        'host' => 'localhost',
-        'db_name' => 'test',
-        'username' => '',
-        'password' => '',
-    ]))
+    ->register('db', new \Framework\DB\MySqlConnection($db_config))
 
     ->register('post_service', \Services\PostService::class)
     ->register('auth_service', \Services\AuthService::class)
