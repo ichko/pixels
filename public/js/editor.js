@@ -1,10 +1,12 @@
 window.onload = () => {
     var editor = ace.edit("editor");
-    // editor.session.setMode(new JavaScriptMode());
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/javascript");
+
 
     document.getElementById('save').onclick = event => {
-        $name = document.getElementById('snippet-name').value;
-        $code = document.getElementById('editor').value;
+        let name = document.getElementById('snippet-name').value;
+        let code = editor.getValue();
 
     };
 };

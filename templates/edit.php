@@ -1,22 +1,14 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/mode-javascript.js"></script>
-<script src="https://ace.c9.io/build/src/ace.js"></script>
+<script src="https://rawgit.com/ajaxorg/ace-builds/master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="/public/js/editor.js"></script>
 
-<style>
-#editor {
-    width: 100%;
-    height: 100%;
-}
-</style>
-
-<div class="top">
+<div class="top clear">
+    <div class="right controls">
+        <button id="run" class="button">Run</button>
+        <button id="save" class="button">Save</button>
+    </div>
     <ul class="info">
         <li><input id="snippet-name" type="text" value="<?=$model['name']?>"></li>
         <li>Author: <b><?=$model['username']?></b></li>
-    </ul>
-    <ul class="right info">
-        <li id="run" class="btn">Run</li>
-        <li id="save" class="btn">Save</li>
     </ul>
 </div>
 
@@ -30,6 +22,6 @@
 
 <script>
     window.addEventListener('load', () => {
-        <?=$model['code']?>
+        // <-?=$model['code']?>
     });
 </script>
