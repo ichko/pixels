@@ -33,7 +33,6 @@ nav {
 
 h1 {
     text-transform: uppercase;
-    font-weight: normal;
     font-size: 15pt;
     margin: 0;
     padding: 15px;
@@ -150,7 +149,6 @@ input[type="submit"]:hover {
 }
 
 .snippet li b {
-    font-weight: normal;
     color: #333;
 }
 
