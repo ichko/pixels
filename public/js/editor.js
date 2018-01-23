@@ -1,6 +1,9 @@
 const bootstrapEditor = () => {
     const requester = new Requester();
     const editor = ace.edit("editor");
+    editor.setOptions({
+        maxLines: Infinity
+    });
 
     editor.setTheme("ace/theme/monokai");
     editor.session.setMode("ace/mode/javascript");

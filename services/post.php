@@ -24,7 +24,7 @@ class PostService
                 $model[$key] = '';
             }
 
-            $result[$key] = $model[$key];
+            $result[$key] = htmlspecialchars($model[$key]);
         }
 
         return $result;
@@ -44,7 +44,7 @@ class PostService
     public function get($key)
     {
         if (array_key_exists($key, $_POST)) {
-            return $_POST[$key];
+            return htmlspecialchars($_POST[$key]);
         }
 
         return '';

@@ -1,6 +1,6 @@
 <?php
 
-$count = 0;
+$count = 1;
 foreach ($model['snippets'] as $snippet) {?>
 <div class="snippet-container">
 <div class="snippet">

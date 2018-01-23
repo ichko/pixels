@@ -1,5 +1,5 @@
 <?php
-require_once 'module.php';
+require_once '../module.php';
 
 $db = $container->resolve('db');
 
