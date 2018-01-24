@@ -2,9 +2,9 @@
 On the HTML canvas :D
 
 # About
-This repository contains project written in for the 2018 WEB course in FMI.
-The web site is `simpler` version of codepen (or whatever online editor).
-You can register login and create `snippets` of code that `paints` on the canvas element.
+This repository contains PHP web framework and sinmple example website on top of it.
+The web site is simple online editor. You can register login and create `snippets` of code that 
+`draw` on the canvas element.
 
 ---
 
