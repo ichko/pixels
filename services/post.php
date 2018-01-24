@@ -24,7 +24,7 @@ class PostService
                 $model[$key] = '';
             }
 
-            $result[$key] = htmlspecialchars($model[$key]);
+            $result[$key] = $model[$key];
         }
 
         return $result;
