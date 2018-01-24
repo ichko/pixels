@@ -2,7 +2,7 @@
 On the HTML canvas :D
 
 # About
-This repository contains PHP web framework and sinmple example website on top of it.
+This repository contains PHP web framework and example website on top of it.
 The web site is simple online editor. You can register login and create `snippets` of code that 
 `draw` on the canvas element.
 
