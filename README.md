@@ -8,7 +8,7 @@ The web site is simple online editor. You can register login and create `snippet
 
 ---
 
-The focus of the project was to make PHP MVC framework and `snippets` web site is just some
+The focus of the project was to make PHP MVC framework and the `snippets` web site is just some
 example build on top of it.
 
 # Content
